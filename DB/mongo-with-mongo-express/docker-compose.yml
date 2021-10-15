@@ -27,6 +27,7 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: "27017"
       VCAP_APP_HOST: "0.0.0.0"
+      WAIT_HOSTS: "mongo:27017"
     ports:
       - "0.0.0.0:8081:8081"
     networks:
@@ -38,7 +39,7 @@ services:
     - |
        chmod +x /wait
        WAIT_BEFORE=mongo:27017 /wait
-       mongo-express 
+       mongo-express WAIT_BEFORE=mongo:27017 WAIT_BEFORE_HOSTS
 networks:
   MONGO:
     name: MONGO
